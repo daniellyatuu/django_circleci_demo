@@ -41,8 +41,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Deploy Application
-        command: echo "Now it's deploying ..."
+          name: Deploy Application
+          command: echo "Now it's deploying ..."
 
 
 workflows:
