@@ -48,23 +48,28 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: main
+      - build
 
-      - test:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+# workflows:
+#   build-test-deploy:
+#     jobs:
+#       - build:
+#           filters:
+#             branches:
+#               only: main
+
+#       - test:
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only: main
           
-      - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: main
+#       - deploy:
+#           requires:
+#             - test
+#           filters:
+#             branches:
+#               only: main
 
 
