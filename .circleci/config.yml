@@ -55,9 +55,16 @@ workflows:
       - test:
           requires:
             - build
+          filters:
+            branches: 
+              only: main
+
       - deploy:
           requires:
             - test
+          filters:
+            branches: 
+              only: main
 
 # workflows:
 #   build-test-deploy:
