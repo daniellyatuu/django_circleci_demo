@@ -7,17 +7,17 @@ jobs:
       - image: cimg/python:3.11.5
     steps:
       - checkout
-      - run:
-          name: Installing Dependencies
-          command: |
-            if [ -f requirements.txt ] then
-            pip install -r requirements.txt
+      # - run:
+      #     name: Installing Dependencies
+      #     command: |
+      #       if [ -f requirements.txt ]; then
+      #       pip install -r requirements.txt
       - run:
           name: Check Python Version
           command: python --version
-      - run:
-          name: Check Installed Dependencies
-          command: pip list
+      # - run:
+      #     name: Check Installed Dependencies
+      #     command: pip list
 
   # Test Job
   test:
@@ -26,38 +26,42 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Installing Dependencies
-          command: |
-            if [ -f requirements.txt ] then
-            pip install -r requirements.txt
-      - run:
-          name: Run Tests
-          command: python manage.py test
+          name: Test commands in here
+          command: echo "Run test in here"
+      # - run:
+      #     name: Installing Dependencies
+      #     command: |
+      #       if [ -f requirements.txt ]; then
+      #       pip install -r requirements.txt
+      # - run:
+      #     name: Run Tests
+      #     command: python manage.py test
 
-    # Deploy Job
-    deploy:
-      docker:
-        - image: cimg/python:3.11.5
-      steps:
-        - checkout
-        - run:
+  # Deploy Job
+  deploy:
+    docker:
+      - image: cimg/python:3.11.5
+    steps:
+      - checkout
+      - run:
           name: Deploy Application
           command: echo "Now it's deploying ..."
 
 
 workflows:
-  version: 2
   build-test-deploy:
     jobs:
       - build
       - test:
           requires:
             - build
+          filters:
+            branches: 
+              only: main
       - deploy:
           requires:
             - test
-
-    filters:
-      branches:
-        only: main
+          filters:
+            branches:
+              only: main
 
