@@ -7,17 +7,18 @@ jobs:
       - image: cimg/python:3.11.5
     steps:
       - checkout
-      # - run:
-      #     name: Installing Dependencies
-      #     command: |
-      #       if [ -f requirements.txt ]; then
-      #       pip install -r requirements.txt
       - run:
           name: Check Python Version
           command: python --version
-      # - run:
-      #     name: Check Installed Dependencies
-      #     command: pip list
+      - run:
+          name: Installing Dependencies
+          command: |
+            if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+            fi
+      - run:
+          name: Check Installed Dependencies
+          command: pip list
 
   # Test Job
   test:
@@ -26,16 +27,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Test commands in here
-          command: echo "Run test in here"
-      # - run:
-      #     name: Installing Dependencies
-      #     command: |
-      #       if [ -f requirements.txt ]; then
-      #       pip install -r requirements.txt
-      # - run:
-      #     name: Run Tests
-      #     command: python manage.py test
+          name: Installing Dependencies
+          command: |
+            if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+            fi
+      - run:
+          name: Run Tests
+          command: python manage.py test
 
   # Deploy Job
   deploy:
