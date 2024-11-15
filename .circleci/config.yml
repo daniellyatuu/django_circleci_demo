@@ -52,9 +52,6 @@ workflows:
   build-test-deploy:
     jobs:
       - build
-          filters:
-            branches:
-              only: main
       - test:
           requires:
             - build
@@ -65,6 +62,6 @@ workflows:
           requires:
             - test
           filters:
-            branches: 
+            branches:
               only: main
 
